@@ -1,7 +1,7 @@
-const express = require('express');
-const { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require('graphql');
-const oresModel = require('./models/oresModel');
+const express = require("express");
+const { graphqlHTTP } = require("express-graphql");
+const { buildSchema } = require("graphql");
+const oresModel = require("./models/oresModel");
 
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
@@ -23,15 +23,18 @@ const schema = buildSchema(`
 const root = {
   ores: () => {
     return oresModel.getWithPrice();
-  }
+  },
 };
 
 const app = express();
-app.use('/api', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true,
-}));
+app.use(
+  "/api",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+  })
+);
 app.listen(4000);
 
-console.log('Running a GraphQL API server at http://localhost:4000/api');
+console.log("Running a GraphQL API server at http://localhost:4000/api");

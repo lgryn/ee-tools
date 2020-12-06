@@ -1,10 +1,10 @@
-const prices = require('../models/pricesModel');
+const prices = require("../models/pricesModel");
 
 module.exports = {
   addRows(data) {
     const formattedData = [];
-    
-    data.forEach(item => {
+
+    data.forEach((item) => {
       const formattedItem = {
         item_id: item.item_id,
         name: item.name,
@@ -13,10 +13,10 @@ module.exports = {
       };
       formattedData.push(formattedItem);
     });
-    
+
     return prices.addAll(formattedData);
   },
   deleteRows() {
     return prices.removeAll();
-  }
+  },
 };
