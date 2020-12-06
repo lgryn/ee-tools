@@ -1,16 +1,23 @@
 const axios = require('axios');
 const csv = require('csvtojson');
 const pricesService = require('../services/pricesService');
+const reprocessingService = require('../services/reprocessingService');
 
-async function getData() {
+async function getData(url, service) {
   try {
-    const response = await axios.get('https://api.eve-echoes-market.com/market-stats/stats.csv');
+    console.log('GET: ' + url);
+    const response = await axios.get(url);
     const rows = await csv().fromString(response.data);
-    await pricesService.deleteRows();
-    await pricesService.addRows(rows);
+    await service.deleteRows();
+    await service.addRows(rows);
   } catch (e) {
     console.log(e);
   }
 }
 
-getData().then(() => process.exit());
+async function main () {
+  await getData('https://api.eve-echoes-market.com/market-stats/stats.csv', pricesService);
+  await getData('https://raw.githubusercontent.com/eve-echoes-db/reprocessing/main/reprocessing.csv', reprocessingService);
+}
+
+main().then(() => process.exit());

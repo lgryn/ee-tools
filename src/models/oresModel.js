@@ -6,5 +6,11 @@ module.exports = {
   },
   removeAll() {
     return knex('ores').truncate();
+  },
+  getWithPrice() {
+    return knex
+      .select('ores.*','prices.sell', 'prices.buy')
+      .from('ores')
+      .leftJoin('prices', 'ores.name', 'prices.name');  
   }
 };

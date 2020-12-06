@@ -10,6 +10,8 @@ const schema = buildSchema(`
     name: String
     volume: Float
     security: String
+    sell: Float
+    buy: Float
   }
  
   type Query {
@@ -20,7 +22,7 @@ const schema = buildSchema(`
 // The root provides a resolver function for each API endpoint
 const root = {
   ores: () => {
-    return oresModel.getAll();
+    return oresModel.getWithPrice();
   }
 };
 
