@@ -1,7 +1,7 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
-const oresModel = require("./models/oresModel");
+const oresModel = require("./services/oresService");
 
 // Construct a schema, using GraphQL schema language
 const schema = buildSchema(`
@@ -10,8 +10,10 @@ const schema = buildSchema(`
     name: String
     volume: Float
     security: String
+    profitByM3: Float
     sell: Float
     buy: Float
+    rarity: String
   }
  
   type Query {
@@ -22,7 +24,7 @@ const schema = buildSchema(`
 // The root provides a resolver function for each API endpoint
 const root = {
   ores: () => {
-    return oresModel.getWithPrice();
+    return oresModel.profitByM3();
   },
 };
 

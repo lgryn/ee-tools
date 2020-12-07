@@ -9,8 +9,9 @@ module.exports = {
   },
   getWithPrice() {
     return knex
-      .select("ores.*", "prices.sell", "prices.buy")
+      .select("ores.*", "prices.sell", "prices.buy", "rarity.name as rarity")
       .from("ores")
-      .leftJoin("prices", "ores.name", "prices.name");
+      .leftJoin("prices", "ores.name", "prices.name")
+      .leftJoin("rarity", "ores.rarity_id", "rarity.id");
   },
 };
