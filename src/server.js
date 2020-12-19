@@ -1,39 +1,22 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
-const oresModel = require("./services/oresService");
-
-// Construct a schema, using GraphQL schema language
-const schema = buildSchema(`
-  type Ore {
-    id: Int
-    name: String
-    volume: Float
-    security: String
-    profitByM3: Float
-    sell: Float
-    buy: Float
-    rarity: String
-  }
- 
-  type Query {
-    ores: [Ore]
-  }
-`);
-
-// The root provides a resolver function for each API endpoint
-const root = {
-  ores: () => {
-    return oresModel.profitByM3();
-  },
-};
+const cors = require("cors");
+const rootResolver = require("./lib/graphql/resolvers");
+const schema = fs.readFileSync(
+  path.resolve(__dirname, "./lib/graphql/schema.graphql"),
+  "utf8"
+);
 
 const app = express();
+app.use(cors());
 app.use(
   "/api",
   graphqlHTTP({
-    schema: schema,
-    rootValue: root,
+    schema: buildSchema(schema),
+    rootValue: rootResolver,
     graphiql: true,
   })
 );

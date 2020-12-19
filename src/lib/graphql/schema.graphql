@@ -1,0 +1,14 @@
+type Ore {
+    id: Int
+    name: String
+    volume: Float
+    security: String
+    profitByM3: Float
+    sell: Float
+    buy: Float
+    rarity: String
+}
+
+type Query {
+    ores: [Ore]
+}
