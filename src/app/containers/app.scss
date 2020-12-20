@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+// Import the initial variables
+@import "../../../node_modules/bulma/sass/utilities/initial-variables";
+
+// Custom vars
+$main-text-color: #000000;
+
+// Override vars
+$footer-padding: 1rem 1.5rem 1rem;
+
+// Import used elements, components
+@import "../../../node_modules/bulma/sass/utilities/_all.sass";
+@import "../../../node_modules/bulma/sass/base/_all.sass";
+@import "../../../node_modules/bulma/sass/layout/all.sass";
+@import "../../../node_modules/bulma/sass/elements/button.sass";
+@import "../../../node_modules/bulma/sass/elements/title.sass";
+@import "../../../node_modules/bulma/sass/form/all.sass";
+@import "../../../node_modules/bulma/sass/grid/tiles.sass";
+@import "../../../node_modules/bulma/sass/elements/container.sass";
+@import "../../../node_modules/bulma/sass/elements/table.sass";
+@import "../../../node_modules/bulma/sass/components/navbar.sass";
+
+body {
+  background-color: #FFFFFF;
+  color: $main-text-color;
+}
