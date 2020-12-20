@@ -6,8 +6,9 @@
   "scripts": {
     "server": "nodemon src/server.js",
     "import": "node src/bin/data-fetcher.js",
-    "build": "NODE_ENV=development webpack",
-    "relay": "relay-compiler --src ./src/app --schema ./src/lib/graphql/schema.graphql"
+    "build:dev": "npm run relay && NODE_ENV=development webpack",
+    "relay": "relay-compiler --src ./src/app --schema ./src/lib/graphql/schema.graphql",
+    "watch": "NODE_ENV=development webpack --watch"
   },
   "repository": {
     "type": "git",

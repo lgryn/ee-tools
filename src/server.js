@@ -20,6 +20,8 @@ app.use(
     graphiql: true,
   })
 );
-app.listen(4000);
+app.listen(process.env.API_PORT);
 
-console.log("Running a GraphQL API server at http://localhost:4000/api");
+console.log(
+  `Running a GraphQL API server at http://localhost:${process.env.API_PORT}/api`
+);

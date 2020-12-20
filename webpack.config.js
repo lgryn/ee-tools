@@ -9,6 +9,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      cache: false,
       title: "EE tools",
       template: path.resolve(__dirname, "src/app/template.html"),
     }),
